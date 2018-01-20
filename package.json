@@ -1,0 +1,16 @@
+{
+  "name": "tweetbyalexa",
+  "version": "1.0.0",
+  "private": true,
+  "description": "TweetByAlexa",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "alexa-sdk": "^1.0.24",
+    "request": "^2.83.0"
+  }
+}
