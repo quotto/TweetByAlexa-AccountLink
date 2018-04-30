@@ -1,1 +1,8 @@
-node_modules
+skill/node_modules/*
+server/.bundle/*
+server/certs/*
+server/vendor/*
+server/.env
+server/.rbenv_version
+server/.ruby-version
+server/Gmefile.lock

@@ -1,0 +1,7 @@
+certs/*
+vendor/*
+.bundle/*
+.env
+.rbenv_version
+.ruby-version
+Gmefile.lock
