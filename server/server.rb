@@ -8,16 +8,6 @@ require 'rack/ssl-enforcer'
 require 'dotenv'
 
 class Server < Sinatra::Base
-    register React::Sinatra
-    configure do
-        React::Sinatra.configure do |config|
-            # configures for bundled React.js
-            config.use_bundled_react = true
-            config.addon=true
-            config.runtime="execjs"
-            config.asset_path = '../public/*.js'
-        end
-    end
     Dotenv.load
     CALLBACK_URL    = ENV['CALLBACK_URL']
     set :session_secret, ENV['SESSION_SECRET']
@@ -70,16 +60,16 @@ class Server < Sinatra::Base
     end
 
     def vendor_id
-        params[:vendor_id] || ENV['VENDOR_ID']
+        params[:vendor_id]
     end
 
 
     def consumer_key
-        params[:consumer_key] || ENV['CONSUMER_KEY']
+        params[:consumer_key] || ENV['TWITTER_CONSUMER_KEY']
     end
 
     def consumer_secret
-        params[:consumer_secret] || ENV['CONSUMER_SECRET']
+        params[:consumer_secret] || ENV['TWITTER_CONSUMER_SECRET']
     end
 
     def access_token(request_token)

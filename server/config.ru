@@ -6,7 +6,7 @@ require 'webrick/https'
 require File.expand_path '../server.rb', __FILE__
 
 use Rack::SslEnforcer
-Rack::Handler::WEBrick.run Sinatra::Application,{
+Rack::Handler::WEBrick.run Server,{
     :Port => 443,
     :BindAddress => '0.0.0.0',
     :SSLEnable => true,

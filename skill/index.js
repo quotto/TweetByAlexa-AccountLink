@@ -27,10 +27,34 @@ function getStrJSTTime(){
     return stringTime;
 }
 
-const get_oauth_param = function(){
+function get_oauth_param() {
     // アクセストークンの取得
     var accessToken = AccessToken;
     return accessToken ? accessToken.split(',') : accessToken
+}
+
+/**
+tweet_message 年月日時分秒の後ろにつけるツイートメッセージ
+alexa_message Alexaからのメッセージ
+**/
+function doEmit(handler,tweet_message,alexa_message) {
+    // アクセストークンの取得
+    const accessToken = handler.event.session.user.accessToken;
+    var accessKey = accessToken ? accessToken.split(',') : accessToken;
+    if(accessKey == null) {
+        // トークン未定義の場合はユーザーに許可を促す
+        handler.emit(':tellWithLinkAccountCard',AccountLinkMessage);
+        return;
+    }
+
+    var stringTime = getStrJSTTime();
+    var message = stringTime + tweet_message + "（Alexaスキルでつぶやいています）";
+    Twitter.postTweet(message,accessKey[0],accessKey[1]).then(()=>{
+        handler.emit(':tell',`つぶやきました。${alexa_message}`);
+    },(error)=>{
+        console.log(error);
+        handler.emit(':tell',ErrorMessage);
+    })
 }
 
 const handlers = {
@@ -38,42 +62,25 @@ const handlers = {
         this.emit('AMAZON.HelpIntent');
     },
     'GoOutTweet' : function() {
-        // アクセストークンの取得
-        var accessKey = get_oauth_param();
-        if(accessKey == null) {
-            // トークン未定義の場合はユーザーに許可を促す
-            this.emit(':tellWithLinkAccountCard',AccountLinkMessage);
-            return;
-        }
-
-        var stringTime = dt.getFullYear() + "年" + (dt.getMonth()+1) + "月" + dt.getDate() + "日 " + dt.getHours() + "時" + dt.getMinutes() + "分" + dt.getSeconds() + "秒 ";
-        var message = stringTime + "に出かけました。（Alexaスキルでつぶやいています）";
-        Twitter.postTweet(message,accessKey[0],accessKey[1]).then(()=>{
-            this.emit(':tell','つぶやきました。<say-as interpret-as="interjection">いってらっしゃい。</say-as>');
-        },(error)=>{
-            console.log(error);
-            this.emit(':tell',ErrorMessage);
-        })
+        doEmit(this,"に出かけました。",'<say-as interpret-as="interjection">いってらっしゃい。</say-as>');
     },
     'ComeHomeTweet' : function() {
-        // アクセストークンの取得
-        var accessKey = get_oauth_param();
-        if(accessKey == null) {
-            // トークン未定義の場合はユーザーに許可を促す
-            this.emit(':tellWithLinkAccountCard',AccountLinkMessage);
-            return;
-        }
-
-        var message = stringTime + "に帰ってきました。（Alexaスキルでつぶやいています）";
-        Twitter.postTweet(message,accessKey[0],accessKey[1]).then(()=>{
-            this.emit(':tell','つぶやきました。<say-as interpret-as="interjection">おかえりなさい。</say-as>');
-        },(error)=>{
-            console.log(error);
-            this.emit(':tell',ErrorMessage);
-        })
+        doEmit(this,"に帰ってきました。",'<say-as interpret-as="interjection">おかえりなさい。</say-as>');
+    },
+    'BeginEatTweet' : function() {
+        doEmit(this,"に食事を始めました。","どうぞ、召しあがれ。");
+    },
+    'EndEatTweet' : function() {
+        doEmit(this,"に食事を終わりました。","お味はいかがでしたか？");
+    },
+    'GoodMorningTweet' : function() {
+        doEmit(this,"に起きました。",'<say-as interpret-as="interjection">おはようございます。</say-as>');
+    },
+    'GoodNightTweet' : function() {
+        doEmit(this,"に就寝しました。",'<say-as interpret-as="interjection">おやすみなさい。</say-as>');
     },
     'AMAZON.HelpIntent': function () {
-        const speechOutput = '<say-as interpret-as="interjection">「おはよう」「いってきます」「いただきます」</say-as>、など、つぶやくと、その時間をツイートします。';
+        const speechOutput = '<say-as interpret-as="interjection">「おはよう」「いってきます」「いただきます」</say-as>、など話しかけると、その時間をツイートします。';
         const reprompt = speechOutput;
         this.emit(':ask', speechOutput, reprompt);
     },
@@ -89,7 +96,7 @@ const handlers = {
 
 exports.handler = function (event, context) {
     const alexa = Alexa.handler(event, context);
-    AccessToken = event.session.user.accessToken
+    // AccessToken = event.session.user.accessToken
     alexa.APP_ID = APP_ID;
     // To enable string internationalization (i18n) features, set a resources object.
     alexa.registerHandlers(handlers);
