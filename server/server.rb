@@ -14,14 +14,12 @@ class Server < Sinatra::Base
     set :show_exceptions, true
     enable :sessions
 
-    # use Rack::SslEnforcer
     use Rack::Session::Cookie, key: '_rack_session',
         path: '/',
         expire_after: 2_592_000, # In seconds
         secret: settings.session_secret
 
     get '/' do
-        # component = ract_component('App',{test: "this is test string"},prerender: true)
         'Hello World'
     end
 
@@ -35,19 +33,15 @@ class Server < Sinatra::Base
         session[:client_id]            = params[:client_id]
         session[:vendor_id]            = vendor_id
         session[:redirect_uri]         = params[:redirect_uri]
-        puts request_token
         redirect request_token.authorize_url
     end
 
     get '/oauth/callback' do
-        puts 'call oauth/callback'
         request_token = OAuth::RequestToken.new consumer,
         session[:request_token],
         session[:request_token_secret]
         access_token = access_token(request_token)
-        puts access_token.inspect
         url = redirect_url(access_token)
-        puts url
         redirect url
     end
 

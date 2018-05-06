@@ -4,7 +4,7 @@ const Alexa = require('alexa-sdk');
 
 const Twitter = require('twitter');
 
-const APP_ID = undefined;  // TODO replace with your app ID (OPTIONAL).
+const APP_ID = "amzn1.ask.skill.4cea545f-7381-42e5-9f85-e3200caba288";
 
 const JSTOffset = 60 * 9 * 60 * 1000; // JST時間を求めるためのオフセット
 
