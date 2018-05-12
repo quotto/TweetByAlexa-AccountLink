@@ -37,11 +37,15 @@ class Server < Sinatra::Base
     end
 
     get '/oauth/callback' do
-        request_token = OAuth::RequestToken.new consumer,
-        session[:request_token],
-        session[:request_token_secret]
-        access_token = access_token(request_token)
-        url = redirect_url(access_token)
+        if params[:denied] then
+            url = session[:redirect_uri]
+        else
+            request_token = OAuth::RequestToken.new consumer,
+            session[:request_token],
+            session[:request_token_secret]
+            access_token = access_token(request_token)
+            url = redirect_url(access_token)
+        end
         redirect url
     end
 
