@@ -5,7 +5,8 @@
   "description": "TweetByAlexa",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "deploy": "@powershell -NoProfile -ExecutionPolicy Unrestricted -Command ./deploy/deploy.ps1"
   },
   "author": "",
   "license": "ISC",

@@ -1,4 +1,6 @@
 skill/node_modules/*
+skill/deploy/deploy.properties
+skill/deploy/*.zip
 server/.bundle/*
 server/certs/*
 server/vendor/*
