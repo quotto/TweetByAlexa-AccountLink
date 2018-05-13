@@ -13,5 +13,8 @@
   "dependencies": {
     "alexa-sdk": "^1.0.24",
     "request": "^2.83.0"
+  },
+  "devDependencies": {
+    "aws-sam-local": "^0.2.11"
   }
 }
