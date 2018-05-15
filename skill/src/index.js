@@ -71,7 +71,7 @@ const handlers = {
         doEmit(this,"に食事を始めました。","どうぞ、召しあがれ。");
     },
     'EndEatTweet' : function() {
-        doEmit(this,"に食事を終わりました。","お味はいかがでしたか？");
+        doEmit(this,"に食事を終えました。","お腹いっぱいですね！");
     },
     'GoodMorningTweet' : function() {
         doEmit(this,"に起きました。",'<say-as interpret-as="interjection">おはようございます。</say-as>');
@@ -80,7 +80,7 @@ const handlers = {
         doEmit(this,"に就寝しました。",'<say-as interpret-as="interjection">おやすみなさい。</say-as>');
     },
     'AMAZON.HelpIntent': function () {
-        const speechOutput = '<say-as interpret-as="interjection">「おはよう」「いってきます」「いただきます」</say-as>、など話しかけると、その時間をツイートします。';
+        const speechOutput = '<say-as interpret-as="interjection">「おはよう」「いってきます」「いただきます」</say-as>、など、話しかけてください。その時間をツイートします。';
         const reprompt = speechOutput;
         this.emit(':ask', speechOutput, reprompt);
     },

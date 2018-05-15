@@ -1,6 +1,7 @@
-skill/node_modules/*
+skill/src/node_modules/*
 skill/deploy/deploy.properties
 skill/deploy/*.zip
+skill/sam/*.json
 server/.bundle/*
 server/certs/*
 server/vendor/*
