@@ -33,15 +33,21 @@ class Server < Sinatra::Base
         session[:client_id]            = params[:client_id]
         session[:vendor_id]            = vendor_id
         session[:redirect_uri]         = params[:redirect_uri]
-        redirect request_token.authorize_url
+        #redirect request_token.authorize_url
+        @authorize_url = request_token.authorize_url
+        erb :accountlink
     end
 
     get '/oauth/callback' do
-        request_token = OAuth::RequestToken.new consumer,
-        session[:request_token],
-        session[:request_token_secret]
-        access_token = access_token(request_token)
-        url = redirect_url(access_token)
+        if params[:denied] then
+            url = session[:redirect_uri]
+        else
+            request_token = OAuth::RequestToken.new consumer,
+            session[:request_token],
+            session[:request_token_secret]
+            access_token = access_token(request_token)
+            url = redirect_url(access_token)
+        end
         redirect url
     end
 

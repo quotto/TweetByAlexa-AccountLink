@@ -9,3 +9,4 @@ server/.env
 server/.rbenv_version
 server/.ruby-version
 server/Gmefile.lock
+server/log/*
