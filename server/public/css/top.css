@@ -1,0 +1,30 @@
+body {
+  text-align:center;
+}
+
+#topimage {
+  margin: 0 auto;
+}
+#topimage > img {
+  width: 128px;
+  height: 128px;
+}
+#title {
+  font-size:200%;
+}
+
+@media (max-width:800px){
+  #title {
+    font-size: 6vw;
+  }
+  #notice {
+    text-align:left;
+  }
+  #myaccount {
+    text-align:right;
+  }
+}
+#myaccount > .twitterurl {
+  color:#a7a7a7;
+  font-size:80%;
+}

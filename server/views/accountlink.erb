@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ツイログ-アカウントリンク</title>
+    <link type="text/css" rel="stylesheet" href="/css/top.css" />
+    <meta name="viewport" content="width=device-width,initial-acale=1">
+  </head>
+  <body>
+    <div id="topimage"><img src="/img/logo.png" alt="ツイログアイコン" title="ツイログアイコン"/></div>
+    <p id="title">ツイログアカウントリンク</p>
+    <p id="notice">
+      ツイログを利用するためにはTwitterにログインのうえ、アプリケーションの連携許可が必要です。
+    </p>
+    <p>
+      <a href="<%= @authorize_url %>">ここからアカウントリンクを行ってください</a>
+    </p>
+    <p id="myaccount">
+      presented by <a class="twitterurl" href="https://twitter.com/quo1987">@quo1987</a>
+    </p>
+  </body>
+</html>
+

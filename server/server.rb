@@ -33,7 +33,9 @@ class Server < Sinatra::Base
         session[:client_id]            = params[:client_id]
         session[:vendor_id]            = vendor_id
         session[:redirect_uri]         = params[:redirect_uri]
-        redirect request_token.authorize_url
+        #redirect request_token.authorize_url
+        @authorize_url = request_token.authorize_url
+        erb :accountlink
     end
 
     get '/oauth/callback' do
