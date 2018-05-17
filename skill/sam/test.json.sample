@@ -1,0 +1,41 @@
+{
+  "session": {
+    "new": true,
+    "sessionId": "session id",
+    "application": {
+      "applicationId": "alexa application id"
+    },
+    "attributes": {},
+    "user": {
+      "userId": "amazon user id",
+      "accessToken": "twitter access token"
+    }
+  },
+  "request": {
+    "type": "IntentRequest",
+    "requestId": "EdwRequestId.requestId",
+    "intent": {
+      "name": "IntentName",
+      "slots": {}
+    },
+    "locale": "ja-JP",
+    "timestamp": "2018-01-16T14:26:59Z"
+  },
+  "context": {
+    "AudioPlayer": {
+      "playerActivity": "IDLE"
+    },
+    "System": {
+      "application": {
+        "applicationId": "alexa application id"
+      },
+      "user": {
+        "userId": "amazon user id"
+      },
+      "device": {
+        "supportedInterfaces": {}
+      }
+    }
+  },
+  "version": "1.0"
+}
