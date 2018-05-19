@@ -61,7 +61,7 @@ function doEmit(handler,tweet_message,alexa_message) {
 const handlers = {
     'LaunchRequest': function () {
         const speechOutput = 'あなたの現在の行動と時間をツイートします。<say-as interpret-as="interjection">「おはよう」「いってきます」「いただきます」</say-as>など、話しかけてください。';
-        this.emit(':tell',speechOutput);
+        this.emit(':ask',speechOutput);
     },
     'GoOutTweet' : function() {
         doEmit(this,"に出かけました。",'<say-as interpret-as="interjection">いってらっしゃい。</say-as>');
