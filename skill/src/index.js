@@ -60,7 +60,7 @@ function doEmit(handler,tweet_message,alexa_message) {
 
 const handlers = {
     'LaunchRequest': function () {
-        const speechOutput = 'あなたの現在の行動と時間をツイートします。<say-as interpret-as="interjection">「おはよう」「いってきます」「いただきます」</say-as>など、話しかけてください。';
+        const speechOutput = '現在の行動と時間をツイートします。<say-as interpret-as="interjection">「おはよう」「いってきます」「いただきます」</say-as>など、話しかけてください。';
         this.emit(':ask',speechOutput);
     },
     'GoOutTweet' : function() {
@@ -82,9 +82,10 @@ const handlers = {
         doEmit(this,"に就寝しました。",'<say-as interpret-as="interjection">おやすみなさい。</say-as>');
     },
     'AMAZON.HelpIntent': function () {
-        const speechOutput = 'あなたの現在の行動と時間をツイートします。' +
+        const speechOutput = '現在の行動と時間をツイートします。' +
+                             '例えば「おはよう」と話しかけると、「2018年5月20日の10時30分31秒に起きました」、とツイートします。' +
                              '<say-as interpret-as="interjection">「おはよう」「おやすみ」「いってきます」「ただいま」「いただきます」「ごちそうさま」</say-as>' +
-                             'のフレーズが使えます。例えば「おはよう」と話しかけると、「2018年5月20日の10時30分31秒に起きました」、とツイートします。';
+                             'の、どれかのフレーズを話しかけてください。';
         const reprompt = speechOutput;
         this.emit(':ask', speechOutput, reprompt);
     },
