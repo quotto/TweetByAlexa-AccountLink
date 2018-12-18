@@ -1,4 +1,4 @@
-const https = require('https')
+const http = require('http')
 const express = require('express')
 const session = require('express-session')
 const OAuth = require('oauth').OAuth
@@ -9,7 +9,7 @@ const Logger = require('./logger.js')
 const logger = new Logger()
 
 const app = express()
-app.use(session({secret: process.env.SESSION_SECRET}))
+app.use(session({secret: process.env.TWEETLOG_SESSION}))
 app.set('view engine','ejs')
 
 var mime = {
@@ -20,11 +20,8 @@ var mime = {
     '.jpg': 'image/jpeg'
 }
 
-var options = {
-    key: fs.readFileSync( './certs/server.key' ),
-    cert: fs.readFileSync( './certs/server.crt' )
-};
-const server = https.createServer( options, app ).listen(3001, ()=>{
+const port = process.argv[2] ? process.argv[2] : 2001
+const server = http.createServer(app).listen(port, ()=>{
     logger.write( "server is starting on " + server.address().port + " ..." )
 });
 
