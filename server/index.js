@@ -17,7 +17,8 @@ var mime = {
     '.css':'text/css',
     '.js':'application/javascript',
     '.png': 'image/png',
-    '.jpg': 'image/jpeg'
+    '.jpg': 'image/jpeg',
+    '.ico':'image/x-icon'
 }
 
 const port = process.argv[2] ? process.argv[2] : 2001
