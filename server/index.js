@@ -29,8 +29,8 @@ const server = http.createServer(app).listen(port, ()=>{
 const oauth = new OAuth(
     'https://api.twitter.com/oauth/request_token',
     'https://api.twitter.com/oauth/access_token',
-    process.env.CONSUMER_KEY,
-    process.env.CONSUMER_SECRET,
+    process.env.TWEETLOG_CONSUMER_KEY,
+    process.env.TWEETLOG_CONSUMER_SECRET,
     '1.0A',
     null,
     'HMAC-SHA1'
